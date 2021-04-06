@@ -1,39 +1,18 @@
-import React, { useState, useEffect } from 'react';
-
-const COUNTER_STATE = 'COUNTER_STATE';
-
-const getStateFromLocalStorage = () => {
-  let state = localStorage.getItem(COUNTER_STATE);
-
-  if (state) {
-    try {
-      state = JSON.parse(state);
-    } catch (err) {
-      state = { counter: 0 };
-    }
-  }
-
-  return state;
-};
-
-const storeStateInLocalStorage = (state) => {
-  localStorage.setItem(COUNTER_STATE, JSON.stringify(state));
-};
+import React, { useEffect } from 'react';
+import { useLocalStorage } from './hooks/useLocalStorage';
 
 const setDocumentTitle = (counter) => {
   document.title = `Count: ${counter}`;
 };
 
 const Counter = ({ step }) => {
-  const initialState = getStateFromLocalStorage();
-  const [counter, setCounter] = useState(initialState.counter);
+  const [counter, setCounter] = useLocalStorage(0, 'counter');
 
   const increment = () => setCounter(counter + step);
   const decrement = () => setCounter(counter - step);
   const reset = () => setCounter(0);
 
   useEffect(() => {
-    storeStateInLocalStorage({ counter });
     setDocumentTitle(counter);
   }, [counter]);
 
