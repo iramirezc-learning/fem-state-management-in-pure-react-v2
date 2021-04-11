@@ -1,34 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { useFetch } from './hooks';
 import CharacterList from './CharacterList';
-import dummyData from './dummy-data';
 import endpoint from './endpoint';
 import './styles.scss';
 
 const Application = () => {
-  const [characters, setCharacters] = useState(dummyData);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [response, isLoading, error] = useFetch(endpoint + '/characters');
 
-  useEffect(() => {
-    setCharacters([]);
-    setIsLoading(true);
-    setError(null);
-
-    fetch(endpoint + '/characters')
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        setIsLoading(false);
-        setCharacters(response.characters || []);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        setError(error);
-      });
-  }, []);
+  const characters = (response && response.characters) || [];
 
   return (
     <div className="Application">
