@@ -7,7 +7,9 @@ import endpoint from './endpoint';
 import './styles.scss';
 
 const Application = () => {
-  const [response, isLoading, error] = useFetch(endpoint + '/characters');
+  const [state] = useFetch(endpoint + '/characters');
+
+  const { response, isLoading, error } = state;
 
   const characters = (response && response.characters) || [];
 
