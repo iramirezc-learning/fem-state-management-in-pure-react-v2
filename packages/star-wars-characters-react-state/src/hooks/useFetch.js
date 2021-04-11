@@ -10,17 +10,24 @@ export const useFetch = (url) => {
     setIsLoading(true);
     setError(null);
 
-    fetch(url)
-      .then((response) => response.json())
-      .then((response) => {
+    const doFetch = async () => {
+      try {
+        const result = await fetch(url);
+        const data = await result.json();
+        setResponse(data);
+      } catch (err) {
+        // NOTE: make sure you are passing the `err` from the
+        // try-catch block and not from the `error` from the state hook! 🤦🏻‍♂️
+        // Lesson learned!
+        setError(err);
+      } finally {
         setIsLoading(false);
-        setResponse(response);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        setError(error);
-      });
-  }, [url]);
+      }
+    };
+
+    doFetch();
+    // eslint-disable-next-line
+  }, []);
 
   return [response, isLoading, error];
 };
