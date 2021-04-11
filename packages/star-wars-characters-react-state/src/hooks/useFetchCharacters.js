@@ -1,5 +1,5 @@
 import { useReducer, useEffect } from 'react';
-import { initialState, reducer, actions } from '../store/characters/index';
+import { initialState, reducer, actions } from '../store/characters';
 
 const {
   fetchCharactersStart,
@@ -11,9 +11,9 @@ export const useFetchCharacters = (url) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    dispatch(fetchCharactersStart());
-
     const doFetch = async () => {
+      dispatch(fetchCharactersStart());
+
       try {
         const result = await fetch(url);
         const data = await result.json();

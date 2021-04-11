@@ -1,17 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { useFetchCharacters } from './hooks';
+import { useThunkReducer } from './hooks';
+import { initialState, reducer, thunks } from './store/characters';
 import CharacterList from './CharacterList';
 import endpoint from './endpoint';
 import './styles.scss';
 
+const { fetchCharacters } = thunks;
+
 const Application = () => {
-  const [state] = useFetchCharacters(endpoint + '/characters');
+  const [state, dispatch] = useThunkReducer(reducer, initialState);
 
   const { response, isLoading, error } = state;
 
   const characters = (response && response.characters) || [];
+
+  const fetch = () => {
+    dispatch(fetchCharacters(endpoint + '/characters'));
+  };
 
   return (
     <div className="Application">
@@ -31,6 +38,7 @@ const Application = () => {
           </section>
         )}
       </main>
+      <button onClick={fetch}>Fetch</button>
     </div>
   );
 };
