@@ -7,7 +7,7 @@ const {
   fetchCharactersError,
 } = actions;
 
-export const useFetch = (url) => {
+export const useFetchCharacters = (url) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -30,4 +30,4 @@ export const useFetch = (url) => {
   return [state, dispatch];
 };
 
-export default useFetch;
+export default useFetchCharacters;

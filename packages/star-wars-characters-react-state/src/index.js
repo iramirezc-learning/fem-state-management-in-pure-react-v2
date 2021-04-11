@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { useFetch } from './hooks';
+import { useFetchCharacters } from './hooks';
 import CharacterList from './CharacterList';
 import endpoint from './endpoint';
 import './styles.scss';
 
 const Application = () => {
-  const [state] = useFetch(endpoint + '/characters');
+  const [state] = useFetchCharacters(endpoint + '/characters');
 
   const { response, isLoading, error } = state;
 
