@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 
 import id from 'uuid/v4';
 
@@ -28,22 +28,28 @@ const Application = () => {
 
   console.log('Rendering App. Grudges: ' + grudges.length);
 
-  const addGrudge = (grudge) => {
-    grudge.id = id();
-    grudge.forgiven = false;
+  const addGrudge = useCallback(
+    (grudge) => {
+      grudge.id = id();
+      grudge.forgiven = false;
 
-    dispatch({
-      type: GRUDGE_ADD,
-      payload: { ...grudge }
-    });
-  };
+      dispatch({
+        type: GRUDGE_ADD,
+        payload: { ...grudge }
+      });
+    },
+    [dispatch]
+  );
 
-  const toggleForgiveness = (id) => {
-    dispatch({
-      type: GRUDGE_FORGIVE,
-      payload: { id }
-    });
-  };
+  const toggleForgiveness = useCallback(
+    (id) => {
+      dispatch({
+        type: GRUDGE_FORGIVE,
+        payload: { id }
+      });
+    },
+    [dispatch]
+  );
 
   return (
     <div className="Application">
