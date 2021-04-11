@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { useThunkReducer } from './hooks';
 import { initialState, reducer, thunks } from './store/characters';
 import CharacterList from './CharacterList';
+import CharacterView from './CharacterView';
 import endpoint from './endpoint';
 import './styles.scss';
 
@@ -37,6 +38,7 @@ const Application = () => {
             <CharacterList characters={characters} />
           </section>
         )}
+        <Route path="/characters/:id" component={CharacterView} />
       </main>
       <button onClick={fetch}>Fetch</button>
     </div>
