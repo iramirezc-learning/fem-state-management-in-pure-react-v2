@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
+
+import { useSetState } from './hooks/useSetState'
 
 import './UserSignup.css'
 
@@ -11,7 +13,7 @@ const initialState = {
 }
 
 const UserSignup = () => {
-  const [state, setState] = useState(initialState)
+  const [state, setState] = useSetState(initialState)
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -23,7 +25,7 @@ const UserSignup = () => {
   }
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.value })
+    setState({ [event.target.name]: event.target.value })
   }
 
   return (
@@ -71,7 +73,7 @@ const UserSignup = () => {
           type="checkbox"
           checked={state.investmentInterest}
           onChange={(event) =>
-            setState({ ...state, [event.target.name]: event.target.checked })
+            setState({ [event.target.name]: event.target.checked })
           }
         />
         Do you want to maybe help us out with an angel investment?
