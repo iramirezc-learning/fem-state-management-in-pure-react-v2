@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { GrudgeContext } from './GrudgeContext';
+import GrudgeContext from './providers/GrudgeContext';
 
 const NewGrudge = React.memo(() => {
   const [person, setPerson] = useState('');

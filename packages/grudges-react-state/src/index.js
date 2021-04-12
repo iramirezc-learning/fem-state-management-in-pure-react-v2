@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Application from './Application';
-import { GrudgeProvider } from './GrudgeContext';
+import { GrudgeProvider } from './providers/GrudgeContext';
 
 import './styles.css';
 

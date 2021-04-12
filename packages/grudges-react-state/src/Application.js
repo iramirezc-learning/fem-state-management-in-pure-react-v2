@@ -1,13 +1,13 @@
 import React from 'react';
 import NewGrudge from './NewGrudge';
-import Actions from './Actions';
+import EditActions from './EditActions';
 import Grudges from './Grudges';
 
 const Application = () => {
   return (
     <div className="Application">
       <NewGrudge />
-      <Actions />
+      <EditActions />
       <Grudges />
     </div>
   );

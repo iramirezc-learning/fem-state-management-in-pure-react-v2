@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Grudge from './Grudge';
-import { GrudgeContext } from './GrudgeContext';
+import GrudgeContext from './providers/GrudgeContext';
 
 const Grudges = () => {
   const { grudges, toggleForgiveness } = useContext(GrudgeContext);

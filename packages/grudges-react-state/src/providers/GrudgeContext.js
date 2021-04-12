@@ -1,17 +1,16 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import id from 'uuid/v4';
-import { defaultState, reducer, actions } from './store';
+import { useTimeTravelReducer } from '../hooks/useTimeTravelReducer';
+import { initialState, reducer, actions } from '../store/grudges';
+import { actions as editActions } from '../store/timetravel';
 
 export const GrudgeContext = React.createContext();
 
 export const GrudgeProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, defaultState);
+  const [state, dispatch] = useTimeTravelReducer(reducer, initialState);
   const { present: grudges } = state;
 
   console.log('[Rendering] <GrudgeProvider>', { grudges });
-
-  const undo = useCallback(() => dispatch(actions.undo()), [dispatch]);
-  const redo = useCallback(() => dispatch(actions.redo()), [dispatch]);
 
   const addGrudge = useCallback(
     (grudge) => {
@@ -28,6 +27,9 @@ export const GrudgeProvider = ({ children }) => {
     [dispatch]
   );
 
+  const undo = useCallback(() => dispatch(editActions.undo()), [dispatch]);
+  const redo = useCallback(() => dispatch(editActions.redo()), [dispatch]);
+
   const hasPast = !!state.past.length;
   const hasFuture = !!state.future.length;
 
@@ -35,7 +37,7 @@ export const GrudgeProvider = ({ children }) => {
     grudges,
     addGrudge,
     toggleForgiveness,
-    controlState: {
+    editActions: {
       hasPast,
       hasFuture,
       undo,
@@ -47,3 +49,5 @@ export const GrudgeProvider = ({ children }) => {
     <GrudgeContext.Provider value={value}>{children}</GrudgeContext.Provider>
   );
 };
+
+export default GrudgeContext;
