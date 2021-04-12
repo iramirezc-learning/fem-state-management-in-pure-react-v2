@@ -79,3 +79,16 @@ input[type='submit'].full-width {
 .NewGrudge-input {
   width: 100%;
 }
+
+.Actions {
+  display: flex;
+  margin-top: 20px;
+  padding: 5px;
+  justify-content: space-between;
+  border: 1px solid #f4466e;
+}
+
+.Actions button:disabled {
+  cursor: not-allowed;
+  background-color: #f32e5b80;
+}

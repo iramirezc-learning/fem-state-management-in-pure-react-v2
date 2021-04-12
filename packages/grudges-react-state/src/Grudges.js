@@ -5,7 +5,7 @@ import { GrudgeContext } from './GrudgeContext';
 const Grudges = () => {
   const { grudges, toggleForgiveness } = useContext(GrudgeContext);
 
-  console.log('Rendering Grudges List');
+  console.log('[Rendering] <Grudges>');
 
   return (
     <section className="Grudges">

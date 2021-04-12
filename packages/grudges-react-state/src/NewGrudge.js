@@ -11,7 +11,7 @@ const NewGrudge = React.memo(() => {
     addGrudge({ person, reason });
   };
 
-  console.log('Rendering New Grudge', { person });
+  console.log('[Rendering] <NewGrudge>', { person });
 
   return (
     <form className="NewGrudge" onSubmit={handleChange}>

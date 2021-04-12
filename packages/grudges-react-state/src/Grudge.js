@@ -3,7 +3,7 @@ import React from 'react';
 const Grudge = React.memo(({ grudge, onForgive }) => {
   const forgive = () => onForgive(grudge.id);
 
-  console.log('Rendering Grudge', { grudge });
+  console.log('[Rendering] <Grudge>', { grudge });
 
   return (
     <article className="Grudge">
